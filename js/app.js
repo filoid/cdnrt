@@ -14,7 +14,7 @@ io.on('userMessage',function(data){
 var fileList = new Vue({
     el: "#files",
     data: {
-        test: 'retube',
+        test: 'godrive',
         files: [],
         file_url: undefined,
         message: '',
@@ -47,6 +47,7 @@ var fileList = new Vue({
                         };
                         this.fileDetails.push(data);
                         this.$set('message', '');
+						this.$set('file_url', '');
                     } else {
                         this.$set('message', response.data.data);
                         toastr['warning'](response.data.data);
@@ -55,7 +56,6 @@ var fileList = new Vue({
                 });
         },
         removeView: function(index){
-            if(!confirm("Are you sure you want to remove this? you will not see any progress")) return;
             this.fileDetails.splice(index,1);
         }
     },
@@ -88,7 +88,7 @@ io.on('upload',function(data){
     item.progress.eta = data.progress.eta || 'Done';
     item.progress.speed = data.progress.speed;
     if(item.progress.at >= 100){
-        $("#loadingme").addClass("hidden");
+		$(".simple_form")[0].reset();
     }
     // $("#"+data.fileId).css("width",data.progress.percentage+"%");
 });
